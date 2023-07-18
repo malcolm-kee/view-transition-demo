@@ -19,11 +19,6 @@
         align-items: center;
       }
 
-      .icon,
-      .large-icon {
-        view-transition-name: sydjs-icon;
-      }
-
       .large-icon {
         width: 200px;
       }
@@ -52,18 +47,8 @@
       const $details = document.querySelector('.details');
 
       const toggleDetails = () => {
-        startTransition(() => {
-          $icon.classList.toggle('hidden');
-          $details.classList.toggle('hidden');
-        });
-      };
-
-      const startTransition = (updateUi) => {
-        if ('startViewTransition' in document) {
-          document.startViewTransition(updateUi);
-        } else {
-          updateUi();
-        }
+        $icon.classList.toggle('hidden');
+        $details.classList.toggle('hidden');
       };
 
       $icon.addEventListener('click', toggleDetails);
