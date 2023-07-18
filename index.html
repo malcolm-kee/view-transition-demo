@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Transition API</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      main {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .icon,
+      .large-icon {
+        view-transition-name: sydjs-icon;
+      }
+
+      .large-icon {
+        width: 200px;
+      }
+
+      .details {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img src="/sydjs.svg" class="icon" />
+      <div class="details hidden">
+        <img src="/sydjs.svg" class="large-icon" />
+        <h1>SydJS View Transition Demo</h1>
+      </div>
+    </main>
+    <script>
+      const $icon = document.querySelector('.icon');
+      const $details = document.querySelector('.details');
+
+      const toggleDetails = () => {
+        startTransition(() => {
+          $icon.classList.toggle('hidden');
+          $details.classList.toggle('hidden');
+        });
+      };
+
+      const startTransition = (updateUi) => {
+        if ('startViewTransition' in document) {
+          document.startViewTransition(updateUi);
+        } else {
+          updateUi();
+        }
+      };
+
+      $icon.addEventListener('click', toggleDetails);
+      $details.addEventListener('click', toggleDetails);
+    </script>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
